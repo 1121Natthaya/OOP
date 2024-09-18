@@ -1,42 +1,48 @@
-import 'dart:convert';
-class Animal{
-  String? name;
-  int? age;
+import 'dart:ffi';
 
-  Animal(this.name, this.age);
+class Mammal {
+  String _species;
 
-  Animal.fromJson(Map<String, dynamic>json){
-    // name = json['name'];
-    // age = json['age'];
-    json.forEach((k, v){
-      name = k;
-      age = v;
-    });
-  }
-
-  Animal.fromJsonString(String jsonString){
-    Map<String, dynamic> json = jsonDecode(jsonString);
-    // name = json['name'];
-    // age = json['age'];
-    json.forEach((k, v){
-      name = k;
-      age = v;
-    });
-  }
-
-  String toString() => 'Name: $name Age: $age';
+  Mammal(this._species);
+  String get species => this._species;
+  String make_sound() => '-Grrrr';  
+  
 }
 
-void main(List<String> args) {
+class Dog extends Mammal{
+  Dog(super._species);
+  String get species => this._species;
+  String make_sound() => '-Woof -Woof!';
 
-  var dang = Animal('Dang', 5);
-  var cat = Animal.fromJson({"sumo":5, "Lucky":10}); 
+}
 
-  var dog = Animal.fromJsonString('{"chang":4, "noi":2}');
+class Cat extends Mammal{
+  Cat(super._species);
+  String get species => this._species;
+  String make_sound() => '-Meow';
+}
+
+class Cow extends Mammal{ 
+  Cow(super._species);
+  String get species => this._species;
+  String make_sound() => '-Mo';
+}
   
-  print(dang);
+// void showAnimal(){
+//     print('Species: ${_species} Animal Sound: ${make_sound()}');
+//   }
+void main(List<String> args) {
+  // var Regular  = Mammal("Regular");
+  // Regular.showAnimal();
 
-  print(cat);
-  print(dog);
+  var mam  = Mammal("Regular");
+  var dog = Dog("Dog");
+  var cat = Cat("Cat");
+  var cow = Cow("Cow");
 
+  print('Species: ${mam._species} Animal Sound: ${mam.make_sound()}');
+  print('Species: ${dog._species} Animal Sound: ${dog.make_sound()}');
+  print('Species: ${cat._species} Animal Sound: ${cat.make_sound()}');
+  print('Species: ${cow._species} Animal Sound: ${cow.make_sound()}');
+  
 }
